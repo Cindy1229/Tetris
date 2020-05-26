@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   let timerId
   let score=0
 
+  const colors= [
+    'orange',
+    'red',
+    'purple',
+    'green',
+    'blue'
+  ]
+
 
   //Tetrominos
   const lTetromino = [
@@ -60,6 +68,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   function draw() {
     current.forEach(index=>{
       squares[currentPosition+index].classList.add('tetromino')
+      squares[currentPosition+index].style.backgroundColor=colors[random]
     })
   }
 
@@ -67,11 +76,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   function undraw() {
     current.forEach(index=>{
       squares[currentPosition+index].classList.remove('tetromino')
+        squares[currentPosition+index].style.backgroundColor=''
     })
   }
-
-  //Move down the tetromino every second
-  //timerId=setInterval(moveDown, 1000);
 
   //Assign listener to keys
   function control(e) {
@@ -176,11 +183,13 @@ document.addEventListener('DOMContentLoaded',()=>{
     //clean the mini gird
     displaySquares.forEach(square => {
       square.classList.remove('tetromino')
+      square.style.backgroundColor=''
     })
 
     //draw on the minifgrid
     upNextTetrominoes[nextRandom].forEach(index => {
       displaySquares[displayIndex+index].classList.add('tetromino')
+      displaySquares[displayIndex+index].style.backgroundColor=colors[nextRandom]
     })
   }
 
@@ -208,6 +217,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         row.forEach(index=> {
           squares[index].classList.remove('taken')
           squares[index].classList.remove('tetromino')
+          squares[index].style.backgroundColor=''
         })
         const squaresRemoved=squares.splice(i, width)
         //console.log(squaresRemoved)
